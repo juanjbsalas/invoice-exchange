@@ -1,5 +1,6 @@
 import { PortalSidebar, type NavItem } from "./PortalSidebar";
 import { PortalHeader } from "./PortalHeader";
+import { Footer } from "./Footer";
 
 interface PortalShellProps {
   children: React.ReactNode;
@@ -31,6 +32,7 @@ export function PortalShell({
       <div className="flex flex-1 flex-col overflow-hidden">
         <PortalHeader userName={userName} userRole={userRole} />
         <main className="flex-1 overflow-y-auto p-6">{children}</main>
+        <Footer compact />
       </div>
     </div>
   );

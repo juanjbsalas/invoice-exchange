@@ -1,13 +1,36 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { updateSession } from "@/lib/supabase/middleware";
+import { NextResponse, type NextRequest } from "next/server";
 
-// Stub middleware — in production this would verify session tokens
-// and redirect unauthenticated users to login.
-// For the MVP demo, all routes are open and role selection happens via the landing page.
-export function middleware(request: NextRequest) {
-  return NextResponse.next();
+const ROLE_PATHS: Record<string, string> = {
+  supplier: "/supplier",
+  manufacturer: "/manufacturer",
+  investor: "/investor",
+  admin: "/admin",
+};
+
+export async function middleware(request: NextRequest) {
+  const { supabaseResponse, user } = await updateSession(request);
+
+  if (!user) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  const role = user.user_metadata?.user_category as string | undefined;
+  const allowedBase = role ? ROLE_PATHS[role] : null;
+  const pathname = request.nextUrl.pathname;
+
+  if (allowedBase && !pathname.startsWith(allowedBase)) {
+    return NextResponse.redirect(new URL(allowedBase, request.url));
+  }
+
+  return supabaseResponse;
 }
 
 export const config = {
-  matcher: ["/farmer/:path*", "/store/:path*", "/investor/:path*", "/admin/:path*"],
+  matcher: [
+    "/supplier/:path*",
+    "/manufacturer/:path*",
+    "/investor/:path*",
+    "/admin/:path*",
+  ],
 };

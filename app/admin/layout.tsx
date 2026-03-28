@@ -1,3 +1,5 @@
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 import { PortalShell } from "@/components/layout/PortalShell";
 
 const NAV_ITEMS = [
@@ -12,18 +14,29 @@ const BOTTOM_ITEMS = [
   { label: "Settings", href: "/admin/settings", icon: "Settings" },
 ];
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) redirect("/");
+
+  const meta = user.user_metadata ?? {};
+  const userName =
+    [meta.first_name, meta.last_name].filter(Boolean).join(" ") ||
+    user.email ||
+    "User";
+
   return (
     <PortalShell
       portalName="Admin Portal"
       portalColor="bg-slate-700"
       navItems={NAV_ITEMS}
       bottomItems={BOTTOM_ITEMS}
-      userName="Platform Ops"
+      userName={userName}
       userRole="Administrator"
     >
       {children}

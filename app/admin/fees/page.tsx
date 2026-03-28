@@ -3,7 +3,7 @@ import { StatCard } from "@/components/ui/stat-card";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { INVOICES } from "@/lib/mock-data";
-import { formatCurrency, formatDate, formatPercent } from "@/lib/utils";
+import { formatCurrency, formatDate } from "@/lib/utils";
 
 export default function FeeLedgerPage() {
   // All invoices that have a fee record (submitted or beyond)
@@ -19,6 +19,8 @@ export default function FeeLedgerPage() {
   const avgFeeRate       = feeRecords.length
     ? feeRecords.reduce((s, i) => s + i.platformFee / i.amount, 0) / feeRecords.length * 100
     : 0;
+
+  const fmtRate = (v: number) => `${v.toPrecision(2)}%`;
 
   // Monthly fee breakdown
   const byMonth = feeRecords.reduce<Record<string, { fees: number; count: number; volume: number }>>(
@@ -36,7 +38,7 @@ export default function FeeLedgerPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-surface-900">Fee Ledger</h1>
+        <h1 className="text-2xl font-bold text-surface-0">Fee Ledger</h1>
         <p className="text-sm text-surface-500 mt-0.5">
           Platform revenue from invoice transactions
         </p>
@@ -67,7 +69,7 @@ export default function FeeLedgerPage() {
         />
         <StatCard
           label="Avg Fee Rate"
-          value={formatPercent(avgFeeRate)}
+          value={fmtRate(avgFeeRate)}
           sub="of invoice face value"
           icon={TrendingUp}
           iconColor="text-brand-600"
@@ -92,33 +94,33 @@ export default function FeeLedgerPage() {
             </thead>
             <tbody className="divide-y divide-surface-100">
               {Object.entries(byMonth).map(([month, data]) => (
-                <tr key={month} className="hover:bg-surface-50 transition-colors">
-                  <td className="px-6 py-3.5 font-medium text-surface-900">{month}</td>
+                <tr key={month} className="hover:bg-surface-800 transition-colors">
+                  <td className="px-6 py-3.5 font-medium text-surface-0">{month}</td>
                   <td className="px-6 py-3.5 text-surface-600">{data.count}</td>
-                  <td className="px-6 py-3.5 font-semibold text-surface-900">
+                  <td className="px-6 py-3.5 font-semibold text-surface-0">
                     {formatCurrency(data.volume)}
                   </td>
                   <td className="px-6 py-3.5 font-semibold text-brand-700">
                     {formatCurrency(data.fees)}
                   </td>
                   <td className="px-6 py-3.5 text-surface-600">
-                    {formatPercent((data.fees / data.volume) * 100)}
+                    {fmtRate((data.fees / data.volume) * 100)}
                   </td>
                 </tr>
               ))}
             </tbody>
             <tfoot>
-              <tr className="border-t-2 border-surface-200 bg-surface-50">
-                <td className="px-6 py-3.5 font-bold text-surface-900">Total</td>
-                <td className="px-6 py-3.5 font-semibold text-surface-900">{feeRecords.length}</td>
-                <td className="px-6 py-3.5 font-bold text-surface-900">
+              <tr className="border-t-2 border-surface-600 bg-surface-800">
+                <td className="px-6 py-3.5 font-bold text-surface-0">Total</td>
+                <td className="px-6 py-3.5 font-semibold text-surface-0">{feeRecords.length}</td>
+                <td className="px-6 py-3.5 font-bold text-surface-0">
                   {formatCurrency(feeRecords.reduce((s, i) => s + i.amount, 0))}
                 </td>
                 <td className="px-6 py-3.5 font-bold text-brand-700">
                   {formatCurrency(totalFees)}
                 </td>
                 <td className="px-6 py-3.5 font-semibold text-surface-600">
-                  {formatPercent(avgFeeRate)}
+                  {fmtRate(avgFeeRate)}
                 </td>
               </tr>
             </tfoot>
@@ -150,8 +152,8 @@ export default function FeeLedgerPage() {
                 {feeRecords.map((inv) => {
                   const collected = inv.status === "paid" || inv.status === "funded";
                   return (
-                    <tr key={inv.id} className="hover:bg-surface-50 transition-colors">
-                      <td className="px-6 py-3.5 font-medium text-surface-900">
+                    <tr key={inv.id} className="hover:bg-surface-800 transition-colors">
+                      <td className="px-6 py-3.5 font-medium text-surface-0">
                         {inv.invoiceNumber}
                       </td>
                       <td className="px-6 py-3.5 text-surface-600 max-w-[120px] truncate">
@@ -160,14 +162,14 @@ export default function FeeLedgerPage() {
                       <td className="px-6 py-3.5 text-surface-600 max-w-[120px] truncate">
                         {inv.storeName}
                       </td>
-                      <td className="px-6 py-3.5 font-semibold text-surface-900">
+                      <td className="px-6 py-3.5 font-semibold text-surface-0">
                         {formatCurrency(inv.amount)}
                       </td>
                       <td className="px-6 py-3.5 font-semibold text-brand-700">
                         {formatCurrency(inv.platformFee)}
                       </td>
                       <td className="px-6 py-3.5 text-surface-500">
-                        {formatPercent((inv.platformFee / inv.amount) * 100)}
+                        {fmtRate((inv.platformFee / inv.amount) * 100)}
                       </td>
                       <td className="px-6 py-3.5 text-surface-500">
                         {formatDate(inv.issueDate)}

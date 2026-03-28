@@ -1,21 +1,20 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { PortalShell } from "@/components/layout/PortalShell";
+import { InvoiceProvider } from "@/lib/invoice-context";
 
 const NAV_ITEMS = [
-  { label: "Home", href: "/investor", icon: "LayoutDashboard" },
-  { label: "Browse Deals", href: "/investor/deals", icon: "TrendingUp" },
-  { label: "Portfolio", href: "/investor/portfolio", icon: "Briefcase" },
-  { label: "Activity", href: "/investor/activity", icon: "Activity" },
-  { label: "Deposit",  href: "/investor/deposit",  icon: "ArrowUpFromLine" },
-  { label: "Withdraw", href: "/investor/withdraw", icon: "ArrowDownToLine" },
+  { label: "Dashboard", href: "/supplier", icon: "LayoutDashboard" },
+  { label: "My Invoices", href: "/supplier/invoices", icon: "FileText" },
+  { label: "Submit Invoice", href: "/supplier/invoices/new", icon: "PlusCircle" },
 ];
 
 const BOTTOM_ITEMS = [
-  { label: "Settings", href: "/investor/settings", icon: "Settings" },
+  { label: "Payment History", href: "/supplier/history", icon: "History" },
+  { label: "Settings", href: "/supplier/settings", icon: "Settings" },
 ];
 
-export default async function InvestorLayout({
+export default async function SupplierLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -33,14 +32,14 @@ export default async function InvestorLayout({
 
   return (
     <PortalShell
-      portalName="Investor Portal"
-      portalColor="bg-violet-600"
+      portalName="Supplier Portal"
+      portalColor="bg-emerald-600"
       navItems={NAV_ITEMS}
       bottomItems={BOTTOM_ITEMS}
       userName={userName}
-      userRole="Investor"
+      userRole="Supplier"
     >
-      {children}
+      <InvoiceProvider>{children}</InvoiceProvider>
     </PortalShell>
   );
 }

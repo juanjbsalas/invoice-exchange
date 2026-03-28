@@ -3,19 +3,16 @@ import { redirect } from "next/navigation";
 import { PortalShell } from "@/components/layout/PortalShell";
 
 const NAV_ITEMS = [
-  { label: "Home", href: "/investor", icon: "LayoutDashboard" },
-  { label: "Browse Deals", href: "/investor/deals", icon: "TrendingUp" },
-  { label: "Portfolio", href: "/investor/portfolio", icon: "Briefcase" },
-  { label: "Activity", href: "/investor/activity", icon: "Activity" },
-  { label: "Deposit",  href: "/investor/deposit",  icon: "ArrowUpFromLine" },
-  { label: "Withdraw", href: "/investor/withdraw", icon: "ArrowDownToLine" },
+  { label: "Dashboard", href: "/manufacturer", icon: "LayoutDashboard" },
+  { label: "Invoice Queue", href: "/manufacturer/invoices", icon: "ClipboardCheck" },
+  { label: "Payment Schedule", href: "/manufacturer/schedule", icon: "CalendarClock" },
 ];
 
 const BOTTOM_ITEMS = [
-  { label: "Settings", href: "/investor/settings", icon: "Settings" },
+  { label: "Settings", href: "/manufacturer/settings", icon: "Settings" },
 ];
 
-export default async function InvestorLayout({
+export default async function ManufacturerLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -33,12 +30,12 @@ export default async function InvestorLayout({
 
   return (
     <PortalShell
-      portalName="Investor Portal"
-      portalColor="bg-violet-600"
+      portalName="Manufacturer Portal"
+      portalColor="bg-blue-600"
       navItems={NAV_ITEMS}
       bottomItems={BOTTOM_ITEMS}
       userName={userName}
-      userRole="Investor"
+      userRole="Manufacturer"
     >
       {children}
     </PortalShell>

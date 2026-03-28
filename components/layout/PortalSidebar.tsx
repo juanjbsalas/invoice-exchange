@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
@@ -16,6 +17,7 @@ import {
   TrendingUp,
   Activity,
   ArrowDownToLine,
+  ArrowUpFromLine,
   Users,
   Receipt,
   type LucideIcon,
@@ -33,6 +35,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   TrendingUp,
   Activity,
   ArrowDownToLine,
+  ArrowUpFromLine,
   Users,
   Receipt,
 };
@@ -61,9 +64,10 @@ export function PortalSidebar({
   return (
     <aside className="flex h-screen w-60 flex-col border-r border-surface-700 bg-surface-800">
       <div className={cn("flex items-center gap-3 px-5 py-5", portalColor)}>
+        <Image src="/logo.png" alt="invoiceXchange logo" width={28} height={28} className="rounded-md shrink-0" />
         <div>
           <p className="text-xs font-medium text-white/70 uppercase tracking-widest">
-            investorXchange
+            invoiceXchange
           </p>
           <p className="text-sm font-semibold text-white leading-tight">
             {portalName}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Bell, ChevronDown } from "lucide-react";
+import { Bell, ChevronDown, Home, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface PortalHeaderProps {
@@ -46,12 +46,21 @@ export function PortalHeader({
           <ChevronDown className="h-3.5 w-3.5 text-surface-400" />
         </div>
 
-        <Link
-          href="/"
-          className="text-xs text-surface-500 hover:text-surface-300 ml-2 transition-colors"
-        >
-          Switch portal
-        </Link>
+        <Button variant="ghost" size="icon-sm" asChild className="text-surface-400 hover:text-surface-0 ml-1">
+          <Link href="/"><Home className="h-4 w-4" /></Link>
+        </Button>
+
+        <form action="/api/auth/signout" method="post">
+          <Button
+            type="submit"
+            variant="ghost"
+            size="icon-sm"
+            className="text-surface-400 hover:text-red-400 ml-1"
+            title="Sign out"
+          >
+            <LogOut className="h-4 w-4" />
+          </Button>
+        </form>
       </div>
     </header>
   );
