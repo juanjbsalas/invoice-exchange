@@ -62,11 +62,18 @@ export function PortalSidebar({
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-60 flex-col border-r border-surface-700 bg-surface-800">
+    <aside className="flex h-screen w-60 flex-col border-r border-surface-700 bg-surface-900">
+      {/* Portal header strip */}
       <div className={cn("flex items-center gap-3 px-5 py-5", portalColor)}>
-        <Image src="/logo.png" alt="invoiceXchange logo" width={28} height={28} className="rounded-md shrink-0" />
+        <Image
+          src="/logo.png"
+          alt="invoiceXchange logo"
+          width={28}
+          height={28}
+          className="rounded-md shrink-0"
+        />
         <div>
-          <p className="text-xs font-medium text-white/70 uppercase tracking-widest">
+          <p className="text-xs font-medium text-white/60 uppercase tracking-widest">
             invoiceXchange
           </p>
           <p className="text-sm font-semibold text-white leading-tight">
@@ -105,14 +112,14 @@ function NavLink({ item, pathname }: { item: NavItem; pathname: string }) {
       className={cn(
         "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
         active
-          ? "bg-brand-800/30 text-brand-300"
-          : "text-surface-400 hover:bg-surface-700 hover:text-surface-0"
+          ? "bg-[#00C805]/12 text-[#00C805]"
+          : "text-surface-400 hover:bg-surface-800 hover:text-surface-100"
       )}
     >
       <Icon
         className={cn(
           "h-4 w-4 shrink-0",
-          active ? "text-brand-400" : "text-surface-500"
+          active ? "text-[#00C805]" : "text-surface-500"
         )}
       />
       {item.label}

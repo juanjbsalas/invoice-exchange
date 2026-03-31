@@ -3,6 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { INVESTMENTS, DEMO_INVESTOR } from "@/lib/mock-data";
 import { formatCurrency, formatDate } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 interface ActivityItem {
   id:      string;
@@ -14,7 +16,16 @@ interface ActivityItem {
   badge?:  string;
 }
 
-export default function ActivityPage() {
+export default async function ActivityPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/");
+  const meta = user.user_metadata ?? {};
+  const userName =
+    [meta.first_name, meta.last_name].filter(Boolean).join(" ") ||
+    user.email ||
+    "User";
+
   // Build a chronological feed from mock investments
   const items: ActivityItem[] = [];
 
@@ -61,11 +72,11 @@ export default function ActivityPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-2xl">
+    <div className="space-y-6 max-w-2xl mx-auto">
       <div>
-        <h1 className="text-2xl font-bold text-surface-900">Activity</h1>
+        <h1 className="text-2xl font-bold text-surface-0">Activity</h1>
         <p className="text-sm text-surface-500 mt-0.5">
-          {DEMO_INVESTOR.name} · all transactions
+          {userName} · all transactions
         </p>
       </div>
 
@@ -74,9 +85,9 @@ export default function ActivityPage() {
         {[
           { label: "Invested",   value: formatCurrency(DEMO_INVESTOR.totalInvested), color: "text-violet-600" },
           { label: "Earned",     value: `+${formatCurrency(DEMO_INVESTOR.totalEarned)}`, color: "text-green-600" },
-          { label: "Balance",    value: formatCurrency(DEMO_INVESTOR.balance), color: "text-surface-900" },
+          { label: "Balance",    value: formatCurrency(DEMO_INVESTOR.balance), color: "text-surface-0" },
         ].map(({ label, value, color }) => (
-          <div key={label} className="rounded-xl border border-surface-200 bg-surface-0 p-4 text-center">
+          <div key={label} className="rounded-xl border border-surface-600 bg-surface-700 p-4 text-center">
             <p className="text-xs text-surface-400 mb-1">{label}</p>
             <p className={`text-lg font-bold ${color}`}>{value}</p>
           </div>
@@ -94,14 +105,14 @@ export default function ActivityPage() {
               const isPositive = item.amount > 0;
 
               return (
-                <li key={item.id} className="flex items-center gap-4 px-6 py-4 hover:bg-surface-50 transition-colors">
+                <li key={item.id} className="flex items-center gap-4 px-6 py-4 hover:bg-surface-800 transition-colors">
                   <div className={`h-10 w-10 rounded-full ${bg} flex items-center justify-center shrink-0`}>
                     <Icon className={`h-5 w-5 ${color}`} />
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <p className="text-sm font-medium text-surface-900">{item.label}</p>
+                      <p className="text-sm font-medium text-surface-0">{item.label}</p>
                       {item.badge && (
                         <Badge variant="secondary" className="text-[10px]">
                           {item.badge}
@@ -114,7 +125,7 @@ export default function ActivityPage() {
                   <div className="text-right shrink-0">
                     <p
                       className={`text-sm font-semibold ${
-                        isPositive ? "text-green-600" : "text-surface-900"
+                        isPositive ? "text-green-600" : "text-surface-0"
                       }`}
                     >
                       {isPositive ? "+" : ""}

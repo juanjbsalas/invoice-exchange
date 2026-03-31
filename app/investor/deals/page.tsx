@@ -48,9 +48,9 @@ export default function BrowseDealsPage() {
   });
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 max-w-4xl mx-auto">
       <div>
-        <h1 className="text-2xl font-bold text-surface-900">Browse Deals</h1>
+        <h1 className="text-2xl font-bold text-surface-0">Browse Deals</h1>
         <p className="text-sm text-surface-500 mt-0.5">
           {deals.length} deal{deals.length !== 1 ? "s" : ""} available · Earn up to{" "}
           <span className="font-semibold text-green-600">8.5% APY</span>
@@ -72,7 +72,7 @@ export default function BrowseDealsPage() {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="h-10 rounded-md border border-surface-300 bg-white px-3 text-sm text-surface-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="h-10 rounded-md border border-surface-300 bg-white px-3 text-sm text-surface-200 focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             {SORT_OPTIONS.map((o) => (
               <option key={o.value} value={o.value}>
@@ -84,7 +84,7 @@ export default function BrowseDealsPage() {
             variant="outline"
             size="icon"
             onClick={() => setShowFilters((v) => !v)}
-            className={showFilters ? "bg-surface-100" : ""}
+            className={showFilters ? "bg-surface-600" : ""}
           >
             <SlidersHorizontal className="h-4 w-4" />
           </Button>
@@ -118,13 +118,13 @@ export default function BrowseDealsPage() {
               <Link
                 key={deal.id}
                 href={`/investor/deals/${deal.id}`}
-                className="group flex flex-col rounded-2xl border border-surface-200 bg-surface-0 p-5 hover:border-violet-300 hover:shadow-md transition-all"
+                className="group flex flex-col rounded-2xl border border-surface-600 bg-surface-700 p-5 hover:border-violet-300 hover:shadow-md transition-all"
               >
                 {/* Top row */}
                 <div className="flex items-start justify-between gap-2 mb-4">
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <p className="font-semibold text-surface-900">
+                      <p className="font-semibold text-surface-0">
                         {deal.storeName}
                       </p>
                       {isHot && (
@@ -152,21 +152,21 @@ export default function BrowseDealsPage() {
 
                 {/* Stats row */}
                 <div className="grid grid-cols-3 gap-2 mb-4 text-center">
-                  <div className="rounded-lg bg-surface-50 px-2 py-2">
+                  <div className="rounded-lg bg-surface-800 px-2 py-2">
                     <p className="text-xs text-surface-400">Total</p>
-                    <p className="text-sm font-semibold text-surface-900 mt-0.5">
+                    <p className="text-sm font-semibold text-surface-0 mt-0.5">
                       {formatCurrency(deal.amount)}
                     </p>
                   </div>
-                  <div className="rounded-lg bg-surface-50 px-2 py-2">
+                  <div className="rounded-lg bg-surface-800 px-2 py-2">
                     <p className="text-xs text-surface-400">Available</p>
-                    <p className="text-sm font-semibold text-surface-900 mt-0.5">
+                    <p className="text-sm font-semibold text-surface-0 mt-0.5">
                       {formatCurrency(remaining)}
                     </p>
                   </div>
-                  <div className="rounded-lg bg-surface-50 px-2 py-2">
+                  <div className="rounded-lg bg-surface-800 px-2 py-2">
                     <p className="text-xs text-surface-400">Matures</p>
-                    <p className="text-sm font-semibold text-surface-900 mt-0.5">
+                    <p className="text-sm font-semibold text-surface-0 mt-0.5">
                       {days}d
                     </p>
                   </div>

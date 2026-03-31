@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+// Standard Card — dark surface with a subtle #00C805-tinted border per style guide
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -8,7 +9,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border border-surface-200 bg-surface-0 shadow-sm",
+      "rounded-xl border border-[#00C805]/20 bg-surface-800 shadow-sm",
       className
     )}
     {...props}
@@ -34,7 +35,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn("font-semibold text-surface-900 leading-tight", className)}
+    className={cn("font-semibold text-surface-0 leading-tight", className)}
     {...props}
   />
 ));
@@ -46,7 +47,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-surface-500", className)}
+    className={cn("text-sm text-surface-400", className)}
     {...props}
   />
 ));

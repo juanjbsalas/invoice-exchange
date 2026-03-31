@@ -30,7 +30,7 @@ export default function AdminDealsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-surface-900">Deal Monitor</h1>
+        <h1 className="text-2xl font-bold text-surface-0">Deal Monitor</h1>
         <p className="text-sm text-surface-500 mt-0.5">
           {active.length} active deals · {atRisk.length} maturing within 14 days
         </p>
@@ -153,8 +153,8 @@ function DealTable({
             const isRed = days !== null && days <= 7;
 
             return (
-              <tr key={inv.id} className={`hover:bg-surface-50 transition-colors ${urgent ? "bg-amber-50/40" : ""}`}>
-                <td className="px-5 py-3.5 font-medium text-surface-900">
+              <tr key={inv.id} className={`hover:bg-surface-800 transition-colors ${urgent ? "bg-amber-50/40" : ""}`}>
+                <td className="px-5 py-3.5 font-medium text-surface-0">
                   {inv.invoiceNumber}
                 </td>
                 <td className="px-5 py-3.5 text-surface-600 text-xs">
@@ -162,7 +162,7 @@ function DealTable({
                   <span className="text-surface-400 mx-1">→</span>
                   <span className="text-blue-700">{inv.storeName}</span>
                 </td>
-                <td className="px-5 py-3.5 font-semibold text-surface-900">
+                <td className="px-5 py-3.5 font-semibold text-surface-0">
                   {formatCurrency(inv.amount)}
                 </td>
                 <td className="px-5 py-3.5 text-surface-500">
@@ -172,7 +172,7 @@ function DealTable({
                   {completed ? (
                     <Badge variant="outline">Paid</Badge>
                   ) : (
-                    <span className={`font-semibold text-sm ${isRed ? "text-red-600" : days! <= 14 ? "text-amber-600" : "text-surface-700"}`}>
+                    <span className={`font-semibold text-sm ${isRed ? "text-red-600" : days! <= 14 ? "text-amber-600" : "text-surface-200"}`}>
                       {days}d
                     </span>
                   )}

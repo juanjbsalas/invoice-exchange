@@ -7,8 +7,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { INVESTMENTS, DEMO_INVESTOR } from "@/lib/mock-data";
 import { formatCurrency, formatDate, daysUntil } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/");
+  const meta = user.user_metadata ?? {};
+  const userName =
+    [meta.first_name, meta.last_name].filter(Boolean).join(" ") ||
+    user.email ||
+    "User";
+
   const active  = INVESTMENTS.filter((i) => i.status === "active");
   const matured = INVESTMENTS.filter((i) => i.status === "matured");
 
@@ -18,11 +29,11 @@ export default function PortfolioPage() {
   const actualEarned   = matured.reduce((s, i) => s + (i.actualReturn ?? 0) - i.amount, 0);
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 max-w-4xl mx-auto">
       <div>
-        <h1 className="text-2xl font-bold text-surface-900">Portfolio</h1>
+        <h1 className="text-2xl font-bold text-surface-0">Portfolio</h1>
         <p className="text-sm text-surface-500 mt-0.5">
-          {DEMO_INVESTOR.name} · {active.length} active, {matured.length} matured
+          {userName} · {active.length} active, {matured.length} matured
         </p>
       </div>
 
@@ -99,16 +110,16 @@ export default function PortfolioPage() {
                   // approximate 60-day term for progress
                   const pct = Math.max(0, Math.min(100, Math.round((1 - days / 60) * 100)));
                   return (
-                    <tr key={inv.id} className="hover:bg-surface-50 transition-colors">
+                    <tr key={inv.id} className="hover:bg-surface-800 transition-colors">
                       <td className="px-6 py-4">
-                        <p className="font-medium text-surface-900">{inv.invoiceNumber}</p>
+                        <p className="font-medium text-surface-0">{inv.invoiceNumber}</p>
                         <p className="text-xs text-surface-400">{inv.storeName}</p>
                       </td>
-                      <td className="px-6 py-4 font-semibold text-surface-900">
+                      <td className="px-6 py-4 font-semibold text-surface-0">
                         {formatCurrency(inv.amount)}
                       </td>
                       <td className="px-6 py-4">
-                        <p className="font-semibold text-surface-900">{formatCurrency(inv.projectedReturn)}</p>
+                        <p className="font-semibold text-surface-0">{formatCurrency(inv.projectedReturn)}</p>
                         <p className="text-xs text-green-600 font-medium">+{formatCurrency(earning)}</p>
                       </td>
                       <td className="px-6 py-4">
@@ -153,15 +164,15 @@ export default function PortfolioPage() {
                 {matured.map((inv) => {
                   const earned = (inv.actualReturn ?? 0) - inv.amount;
                   return (
-                    <tr key={inv.id} className="hover:bg-surface-50 transition-colors">
+                    <tr key={inv.id} className="hover:bg-surface-800 transition-colors">
                       <td className="px-6 py-4">
-                        <p className="font-medium text-surface-900">{inv.invoiceNumber}</p>
+                        <p className="font-medium text-surface-0">{inv.invoiceNumber}</p>
                         <p className="text-xs text-surface-400">{inv.storeName}</p>
                       </td>
-                      <td className="px-6 py-4 font-semibold text-surface-900">
+                      <td className="px-6 py-4 font-semibold text-surface-0">
                         {formatCurrency(inv.amount)}
                       </td>
-                      <td className="px-6 py-4 font-semibold text-surface-900">
+                      <td className="px-6 py-4 font-semibold text-surface-0">
                         {formatCurrency(inv.actualReturn ?? 0)}
                       </td>
                       <td className="px-6 py-4 font-semibold text-green-600">

@@ -53,7 +53,7 @@ export default function AdminDashboardPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-surface-900">
+          <h1 className="text-2xl font-bold text-surface-0">
             Platform Overview
           </h1>
           <p className="text-sm text-surface-500 mt-0.5">
@@ -146,8 +146,8 @@ export default function AdminDashboardPage() {
                   { label: "Funded",     count: statusCounts["funded"]    ?? 0 },
                   { label: "Paid",       count: statusCounts["paid"]      ?? 0 },
                 ].map(({ label, count }) => (
-                  <div key={label} className="rounded-lg bg-surface-50 py-2">
-                    <p className="text-xl font-bold text-surface-900">{count}</p>
+                  <div key={label} className="rounded-lg bg-surface-800 py-2">
+                    <p className="text-xl font-bold text-surface-0">{count}</p>
                     <p className="text-xs text-surface-400 mt-0.5">{label}</p>
                   </div>
                 ))}
@@ -182,7 +182,7 @@ export default function AdminDashboardPage() {
                   return (
                     <div key={inv.id} className="flex items-center justify-between gap-2">
                       <div className="min-w-0">
-                        <p className="text-xs font-medium text-surface-900 truncate">
+                        <p className="text-xs font-medium text-surface-0 truncate">
                           {inv.invoiceNumber}
                         </p>
                         <p className="text-xs text-surface-400 truncate">{inv.storeName}</p>
@@ -215,11 +215,11 @@ export default function AdminDashboardPage() {
                 <Link
                   key={href}
                   href={href}
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 hover:bg-surface-100 transition-colors"
+                  className="flex items-center justify-between rounded-lg px-3 py-2.5 hover:bg-surface-600 transition-colors"
                 >
                   <div className="flex items-center gap-2.5">
                     <Icon className="h-4 w-4 text-surface-400" />
-                    <span className="text-sm font-medium text-surface-700">{label}</span>
+                    <span className="text-sm font-medium text-surface-200">{label}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     {count !== null && (
@@ -263,8 +263,8 @@ export default function AdminDashboardPage() {
               {recentInvoices.map((inv) => {
                 const badge = STATUS_BADGE[inv.status] ?? { label: inv.status, variant: "secondary" as const };
                 return (
-                  <tr key={inv.id} className="hover:bg-surface-50 transition-colors">
-                    <td className="px-6 py-3.5 font-medium text-surface-900">
+                  <tr key={inv.id} className="hover:bg-surface-800 transition-colors">
+                    <td className="px-6 py-3.5 font-medium text-surface-0">
                       {inv.invoiceNumber}
                     </td>
                     <td className="px-6 py-3.5 text-surface-600 max-w-[140px] truncate">
@@ -273,7 +273,7 @@ export default function AdminDashboardPage() {
                     <td className="px-6 py-3.5 text-surface-600 max-w-[140px] truncate">
                       {inv.storeName}
                     </td>
-                    <td className="px-6 py-3.5 font-semibold text-surface-900">
+                    <td className="px-6 py-3.5 font-semibold text-surface-0">
                       {formatCurrency(inv.amount)}
                     </td>
                     <td className="px-6 py-3.5 text-surface-500">
@@ -284,7 +284,7 @@ export default function AdminDashboardPage() {
                     </td>
                     <td className="px-6 py-3.5">
                       <div className="flex items-center gap-2">
-                        <div className="w-16 h-1.5 rounded-full bg-surface-100 overflow-hidden">
+                        <div className="w-16 h-1.5 rounded-full bg-surface-600 overflow-hidden">
                           <div
                             className="h-full bg-brand-500 rounded-full"
                             style={{ width: `${inv.fundedPercent}%` }}
@@ -321,11 +321,11 @@ export default function AdminDashboardPage() {
                   <Sprout className="h-4 w-4 text-emerald-600" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-surface-900 truncate">{f.name}</p>
+                  <p className="text-sm font-medium text-surface-0 truncate">{f.name}</p>
                   <p className="text-xs text-surface-400">{f.location} · {f.invoiceCount} invoices</p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-sm font-semibold text-surface-900">{formatCurrency(f.totalFunded)}</p>
+                  <p className="text-sm font-semibold text-surface-0">{formatCurrency(f.totalFunded)}</p>
                   <p className="text-xs text-surface-400">funded</p>
                 </div>
               </div>
@@ -349,11 +349,11 @@ export default function AdminDashboardPage() {
                   <ShoppingCart className="h-4 w-4 text-blue-600" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-surface-900 truncate">{s.name}</p>
+                  <p className="text-sm font-medium text-surface-0 truncate">{s.name}</p>
                   <p className="text-xs text-surface-400">{s.location}</p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-sm font-semibold text-surface-900">{formatCurrency(s.totalOwed)}</p>
+                  <p className="text-sm font-semibold text-surface-0">{formatCurrency(s.totalOwed)}</p>
                   {s.pendingConfirmations > 0 && (
                     <Badge variant="warning" className="text-[10px] mt-0.5">
                       {s.pendingConfirmations} pending

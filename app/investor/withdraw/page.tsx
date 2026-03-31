@@ -42,7 +42,7 @@ export default function WithdrawPage() {
           </div>
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-surface-900">Withdrawal Initiated</h1>
+          <h1 className="text-2xl font-bold text-surface-0">Withdrawal Initiated</h1>
           <p className="text-surface-500 mt-2">
             {formatCurrency(numAmount)} is on its way to your bank account.
           </p>
@@ -52,15 +52,15 @@ export default function WithdrawPage() {
           <CardContent className="pt-5 space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-surface-500">Amount</span>
-              <span className="font-semibold text-surface-900">{formatCurrency(numAmount)}</span>
+              <span className="font-semibold text-surface-0">{formatCurrency(numAmount)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-surface-500">To</span>
-              <span className="font-medium text-surface-900">{selectedBank.label}</span>
+              <span className="font-medium text-surface-0">{selectedBank.label}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-surface-500">Estimated arrival</span>
-              <span className="font-medium text-surface-900">1–3 business days</span>
+              <span className="font-medium text-surface-0">1–3 business days</span>
             </div>
           </CardContent>
         </Card>
@@ -87,13 +87,13 @@ export default function WithdrawPage() {
       <div className="max-w-md mx-auto space-y-6">
         <button
           onClick={() => setStep("form")}
-          className="flex items-center gap-1.5 text-sm text-surface-500 hover:text-surface-700 transition-colors"
+          className="flex items-center gap-1.5 text-sm text-surface-500 hover:text-surface-200 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" /> Back
         </button>
 
         <div>
-          <h1 className="text-2xl font-bold text-surface-900">Confirm Withdrawal</h1>
+          <h1 className="text-2xl font-bold text-surface-0">Confirm Withdrawal</h1>
           <p className="text-sm text-surface-500 mt-1">Review before sending.</p>
         </div>
 
@@ -101,28 +101,28 @@ export default function WithdrawPage() {
           <CardContent className="pt-5 space-y-3 text-sm">
             <div className="flex justify-between">
               <span className="text-surface-500">Amount</span>
-              <span className="font-bold text-surface-900 text-base">
+              <span className="font-bold text-surface-0 text-base">
                 {formatCurrency(numAmount)}
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-surface-500">To account</span>
-              <span className="font-medium text-surface-900">{selectedBank.label}</span>
+              <span className="font-medium text-surface-0">{selectedBank.label}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-surface-500">Type</span>
-              <span className="font-medium text-surface-900">{selectedBank.type}</span>
+              <span className="font-medium text-surface-0">{selectedBank.type}</span>
             </div>
             <div className="flex justify-between border-t border-surface-100 pt-3">
               <span className="text-surface-500">Remaining balance</span>
-              <span className="font-medium text-surface-900">
+              <span className="font-medium text-surface-0">
                 {formatCurrency(available - numAmount)}
               </span>
             </div>
           </CardContent>
         </Card>
 
-        <div className="flex items-start gap-2.5 rounded-lg bg-surface-50 border border-surface-200 p-3 text-xs text-surface-500">
+        <div className="flex items-start gap-2.5 rounded-lg bg-surface-800 border border-surface-600 p-3 text-xs text-surface-500">
           <Info className="h-4 w-4 shrink-0 mt-0.5" />
           Withdrawals typically arrive within 1–3 business days via ACH transfer.
           You cannot cancel once initiated.
@@ -146,11 +146,11 @@ export default function WithdrawPage() {
       <div>
         <Link
           href="/investor"
-          className="flex items-center gap-1.5 text-sm text-surface-500 hover:text-surface-700 transition-colors mb-4"
+          className="flex items-center gap-1.5 text-sm text-surface-500 hover:text-surface-200 transition-colors mb-4"
         >
           <ArrowLeft className="h-4 w-4" /> Home
         </Link>
-        <h1 className="text-2xl font-bold text-surface-900">Withdraw Funds</h1>
+        <h1 className="text-2xl font-bold text-surface-0">Withdraw Funds</h1>
         <p className="text-sm text-surface-500 mt-1">
           Transfer your available balance to your bank account.
         </p>
@@ -179,7 +179,7 @@ export default function WithdrawPage() {
                   className={`flex items-center gap-3 rounded-xl border p-4 cursor-pointer transition-colors ${
                     bankId === bank.id
                       ? "border-violet-400 bg-violet-50"
-                      : "border-surface-200 hover:bg-surface-50"
+                      : "border-surface-600 hover:bg-surface-800"
                   }`}
                 >
                   <input
@@ -190,11 +190,11 @@ export default function WithdrawPage() {
                     onChange={() => setBankId(bank.id)}
                     className="accent-violet-600"
                   />
-                  <div className="h-8 w-8 rounded-lg bg-surface-100 flex items-center justify-center shrink-0">
+                  <div className="h-8 w-8 rounded-lg bg-surface-600 flex items-center justify-center shrink-0">
                     <Building2 className="h-4 w-4 text-surface-500" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-surface-900">{bank.label}</p>
+                    <p className="text-sm font-medium text-surface-0">{bank.label}</p>
                     <p className="text-xs text-surface-400">{bank.type}</p>
                   </div>
                 </label>
@@ -231,14 +231,14 @@ export default function WithdrawPage() {
                 <button
                   key={n}
                   onClick={() => setAmount(String(Math.min(n, available)))}
-                  className="flex-1 rounded-lg border border-surface-200 py-1.5 text-xs font-medium text-surface-600 hover:bg-surface-50 transition-colors"
+                  className="flex-1 rounded-lg border border-surface-600 py-1.5 text-xs font-medium text-surface-600 hover:bg-surface-800 transition-colors"
                 >
                   ${n >= 1000 ? "1k" : n}
                 </button>
               ))}
               <button
                 onClick={() => setAmount(String(available))}
-                className="flex-1 rounded-lg border border-surface-200 py-1.5 text-xs font-medium text-surface-600 hover:bg-surface-50 transition-colors"
+                className="flex-1 rounded-lg border border-surface-600 py-1.5 text-xs font-medium text-surface-600 hover:bg-surface-800 transition-colors"
               >
                 All
               </button>

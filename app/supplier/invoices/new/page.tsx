@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GROCERY_STORES } from "@/lib/mock-data";
 import { useInvoices } from "@/lib/invoice-context";
+import { createClient } from "@/lib/supabase/client";
 import { formatCurrency } from "@/lib/utils";
 
 type Step = "form" | "review" | "success";
@@ -43,6 +44,19 @@ export default function SubmitInvoicePage() {
   const { addInvoice } = useInvoices();
   const [step, setStep] = useState<Step>("form");
   const [form, setForm] = useState<FormData>(EMPTY_FORM);
+  const [farmerFullName, setFarmerFullName] = useState<string>("");
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      const meta = data.user?.user_metadata ?? {};
+      const name =
+        [meta.first_name, meta.last_name].filter(Boolean).join(" ") ||
+        data.user?.email ||
+        "";
+      setFarmerFullName(name);
+    });
+  }, []);
 
   const selectedStore = GROCERY_STORES.find((s) => s.id === form.storeId);
   const amount = parseFloat(form.amount) || 0;
@@ -70,7 +84,7 @@ export default function SubmitInvoicePage() {
       id: `new-${Date.now()}`,
       invoiceNumber: `INV-${Date.now().toString().slice(-6)}`,
       farmerId: "f1",
-      farmerName: "Maria Santos",
+      farmerName: farmerFullName,
       storeId: form.storeId,
       storeName: selectedStore?.name ?? "",
       amount,

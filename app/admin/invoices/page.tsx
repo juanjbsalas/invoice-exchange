@@ -76,7 +76,7 @@ export default function AdminInvoicesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-surface-900">Invoice Management</h1>
+          <h1 className="text-2xl font-bold text-surface-0">Invoice Management</h1>
           <p className="text-sm text-surface-500 mt-0.5">
             {invoices.length} invoices · {formatCurrency(totalVolume)} total volume
           </p>
@@ -104,7 +104,7 @@ export default function AdminInvoicesPage() {
                 className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
                   statusFilter === f.value
                     ? "bg-slate-700 text-white"
-                    : "bg-surface-100 text-surface-600 hover:bg-surface-200"
+                    : "bg-surface-600 text-surface-600 hover:bg-surface-200"
                 }`}
               >
                 {f.label}
@@ -115,7 +115,7 @@ export default function AdminInvoicesPage() {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortKey)}
-            className="h-9 rounded-md border border-surface-300 bg-white px-2.5 text-xs text-surface-700 focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="h-9 rounded-md border border-surface-300 bg-white px-2.5 text-xs text-surface-200 focus:outline-none focus:ring-2 focus:ring-slate-500"
           >
             <option value="date">Newest first</option>
             <option value="amount">Highest amount</option>
@@ -158,10 +158,10 @@ export default function AdminInvoicesPage() {
                     const overridden = !!overrides[inv.id];
 
                     return (
-                      <tr key={inv.id} className={`hover:bg-surface-50 transition-colors ${overridden ? "bg-violet-50/40" : ""}`}>
+                      <tr key={inv.id} className={`hover:bg-surface-800 transition-colors ${overridden ? "bg-violet-50/40" : ""}`}>
                         <td className="px-5 py-3.5">
                           <div className="flex items-center gap-1.5">
-                            <span className="font-medium text-surface-900">{inv.invoiceNumber}</span>
+                            <span className="font-medium text-surface-0">{inv.invoiceNumber}</span>
                             {overridden && (
                               <span className="text-[10px] text-violet-600 font-medium bg-violet-100 rounded px-1">
                                 overridden
@@ -175,7 +175,7 @@ export default function AdminInvoicesPage() {
                         <td className="px-5 py-3.5 text-surface-600 max-w-[130px] truncate">
                           {inv.storeName}
                         </td>
-                        <td className="px-5 py-3.5 font-semibold text-surface-900">
+                        <td className="px-5 py-3.5 font-semibold text-surface-0">
                           {formatCurrency(inv.amount)}
                         </td>
                         <td className="px-5 py-3.5 text-surface-500">
@@ -203,19 +203,19 @@ export default function AdminInvoicesPage() {
                           <div className="relative inline-block">
                             <button
                               onClick={() => setOpenMenu(openMenu === inv.id ? null : inv.id)}
-                              className="flex items-center gap-1 rounded-md border border-surface-200 px-2 py-1.5 text-xs text-surface-600 hover:bg-surface-100 transition-colors"
+                              className="flex items-center gap-1 rounded-md border border-surface-600 px-2 py-1.5 text-xs text-surface-600 hover:bg-surface-600 transition-colors"
                             >
                               Actions <ChevronDown className="h-3 w-3" />
                             </button>
                             {openMenu === inv.id && (
-                              <div className="absolute right-0 top-8 z-20 w-44 rounded-lg border border-surface-200 bg-white shadow-lg py-1">
+                              <div className="absolute right-0 top-8 z-20 w-44 rounded-lg border border-surface-600 bg-white shadow-lg py-1">
                                 {(["submitted","confirmed","funded","paid","disputed"] as InvoiceStatus[])
                                   .filter((s) => s !== es)
                                   .map((s) => (
                                     <button
                                       key={s}
                                       onClick={() => overrideStatus(inv.id, s)}
-                                      className="w-full text-left px-3 py-2 text-xs text-surface-700 hover:bg-surface-50 capitalize transition-colors"
+                                      className="w-full text-left px-3 py-2 text-xs text-surface-200 hover:bg-surface-800 capitalize transition-colors"
                                     >
                                       Mark as {s}
                                     </button>
@@ -223,7 +223,7 @@ export default function AdminInvoicesPage() {
                                 <hr className="my-1 border-surface-100" />
                                 <button
                                   onClick={() => setOpenMenu(null)}
-                                  className="w-full text-left px-3 py-2 text-xs text-surface-400 hover:bg-surface-50 transition-colors"
+                                  className="w-full text-left px-3 py-2 text-xs text-surface-400 hover:bg-surface-800 transition-colors"
                                 >
                                   Cancel
                                 </button>

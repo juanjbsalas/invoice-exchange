@@ -156,9 +156,11 @@ export default function HomePage() {
               <span className="h-2 w-2 rounded-full bg-accent-500 animate-pulse" />
               the IX factor
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-surface-0 leading-tight max-w-3xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl font-bold text-surface-0 leading-tight max-w-3xl mx-auto font-serif">
               Suppliers get paid today.{" "}
-              <span className="text-brand-400">Investors earn 8% APY.</span>
+              <span className="bg-gradient-to-r from-[#00C805] to-[#4A90E2] bg-clip-text text-transparent">
+                Investors earn 8% APY.
+              </span>
             </h1>
             <p className="mt-5 text-lg text-surface-400 max-w-2xl mx-auto">
               We bridge the gap between suppliers waiting 60 days to get paid and
@@ -166,7 +168,8 @@ export default function HomePage() {
             </p>
             <div className="mt-10">
               <Button
-                className="bg-gradient-to-r from-[#00C805] to-[#4A90E2] text-white px-16 py-5 text-xl font-bold shadow-xl rounded-xl hover:scale-105 transition-transform duration-200"
+                variant="premium"
+                className="px-16 py-5 text-xl font-bold shadow-xl rounded-xl hover:scale-105 transition-transform duration-200"
                 onClick={() => {
                   if (user) {
                     const role = user.user_metadata?.user_category as string | undefined;
@@ -206,7 +209,7 @@ export default function HomePage() {
                   <p className={`text-xs font-semibold uppercase tracking-widest ${portal.textColor} mb-1`}>
                     {portal.role}
                   </p>
-                  <h2 className="text-lg font-bold text-surface-0 mb-2">{portal.tagline}</h2>
+                  <h2 className="text-lg font-bold text-surface-0 mb-2 font-serif">{portal.tagline}</h2>
                   <p className="text-sm text-surface-400 leading-relaxed mb-5 flex-1">
                     {portal.description}
                   </p>
@@ -231,7 +234,7 @@ export default function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-widest text-surface-500 mb-3">
                 Performance Comparison
               </p>
-              <h2 className="text-3xl font-bold text-surface-0">
+              <h2 className="text-3xl font-bold text-surface-0 font-serif">
                 S&amp;P 500 vs invoiceXchange
               </h2>
               <p className="mt-3 text-surface-400 max-w-xl mx-auto">
@@ -246,7 +249,7 @@ export default function HomePage() {
         {/* How it works */}
         <section className="snap-start border-t border-surface-800 bg-surface-800 py-16">
           <div className="max-w-4xl mx-auto px-8">
-            <h2 className="text-center text-2xl font-bold text-surface-0 mb-12">
+            <h2 className="text-center text-2xl font-bold text-surface-0 mb-12 font-serif">
               How it works
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">

@@ -24,7 +24,7 @@ export default function InvestorHomePage() {
   const projectedEarnings = projectedTotal - active.reduce((s, i) => s + i.amount, 0);
 
   return (
-    <div className="space-y-6 max-w-3xl">
+    <div className="space-y-6 max-w-3xl mx-auto">
       {/* Balance hero — Robinhood style */}
       <div className="rounded-2xl bg-gradient-to-br from-violet-600 to-violet-800 p-7 text-white">
         <p className="text-sm font-medium text-white/70 mb-1">Total Balance</p>
@@ -64,6 +64,13 @@ export default function InvestorHomePage() {
               <Zap className="h-3.5 w-3.5" />
               Browse Deals
             </Link>
+          </Button>
+          <Button
+            size="sm"
+            asChild
+            className="bg-white/10 hover:bg-white/20 text-white border border-white/20"
+          >
+            <Link href="/investor/deposit">Deposit</Link>
           </Button>
           <Button
             size="sm"
@@ -114,11 +121,11 @@ export default function InvestorHomePage() {
               return (
                 <div
                   key={inv.id}
-                  className="flex items-center gap-4 rounded-xl border border-surface-200 p-4"
+                  className="flex items-center gap-4 rounded-xl border border-surface-600 p-4"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <p className="text-sm font-semibold text-surface-900">
+                      <p className="text-sm font-semibold text-surface-0">
                         {inv.invoiceNumber}
                       </p>
                       <Badge variant="secondary" className="text-xs">
@@ -140,7 +147,7 @@ export default function InvestorHomePage() {
                     </div>
                   </div>
                   <div className="text-right shrink-0">
-                    <p className="font-bold text-surface-900">
+                    <p className="font-bold text-surface-0">
                       {formatCurrency(inv.amount)}
                     </p>
                     <p className="text-xs text-green-600 font-medium mt-0.5">
@@ -173,11 +180,11 @@ export default function InvestorHomePage() {
               <Link
                 key={deal.id}
                 href={`/investor/deals/${deal.id}`}
-                className="block rounded-xl border border-surface-200 p-4 hover:border-violet-300 hover:bg-violet-50/50 transition-all"
+                className="block rounded-xl border border-surface-600 p-4 hover:border-violet-300 hover:bg-violet-50/50 transition-all"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-surface-900">
+                    <p className="text-sm font-semibold text-surface-0">
                       {deal.storeName}
                     </p>
                     <p className="text-xs text-surface-500 mt-0.5 truncate">
@@ -193,7 +200,7 @@ export default function InvestorHomePage() {
                   </div>
                   <div className="text-right shrink-0">
                     <p className="text-xs text-surface-400">Matures</p>
-                    <p className="text-sm font-medium text-surface-700">
+                    <p className="text-sm font-medium text-surface-200">
                       {formatDate(deal.dueDate)}
                     </p>
                     <p className="text-lg font-bold text-green-600 mt-1">
@@ -217,10 +224,10 @@ export default function InvestorHomePage() {
         ].map(({ icon: Icon, label, sub }) => (
           <div
             key={label}
-            className="flex flex-col items-center text-center rounded-xl border border-surface-200 bg-surface-0 p-4"
+            className="flex flex-col items-center text-center rounded-xl border border-surface-600 bg-surface-700 p-4"
           >
             <Icon className="h-5 w-5 text-violet-500 mb-2" />
-            <p className="text-sm font-semibold text-surface-900">{label}</p>
+            <p className="text-sm font-semibold text-surface-0">{label}</p>
             <p className="text-xs text-surface-400 mt-0.5">{sub}</p>
           </div>
         ))}
