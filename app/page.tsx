@@ -92,11 +92,10 @@ export default function HomePage() {
         {/* Navbar */}
         <header className="sticky top-0 z-40 h-14 border-b border-surface-800 bg-surface-900/90 backdrop-blur-sm">
           <div className="flex items-center justify-between px-8 py-4 max-w-7xl mx-auto">
-            <div className="flex items-center gap-2.5">
-              <Image src="/logo.png" alt="invoiceXchange logo" width={32} height={32} className="rounded-lg" />
-              <span className="text-lg font-bold text-surface-0">
-                invoiceXchange
-              </span>
+            <div className="flex items-center">
+              <span className="text-lg font-bold text-surface-0">invoice</span>
+              <Image src="/logo.png" alt="X" width={40} height={40} className="mx-1 inline-block [filter:brightness(0)_saturate(100%)_invert(52%)_sepia(100%)_saturate(1000%)_hue-rotate(85deg)_brightness(1.4)]" />
+              <span className="text-lg font-bold text-surface-0">change</span>
             </div>
             <div className="flex items-center gap-3">
               {user ? (
@@ -128,7 +127,7 @@ export default function HomePage() {
                   >
                     Log in
                   </Button>
-                  <Button size="sm" onClick={() => setModal("signup")}>
+                  <Button size="sm" variant="premium" onClick={() => setModal("signup")}>
                     Sign up
                   </Button>
                 </>
@@ -138,18 +137,7 @@ export default function HomePage() {
         </header>
 
         {/* Hero */}
-        <section className="relative h-[calc(100vh-3.5rem)] snap-start flex flex-col items-center justify-center px-8 text-center overflow-hidden">
-          {/* Video background */}
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            src="/hero-bg.mp4"
-          />
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-surface-900/70" />
+        <section className="relative h-[calc(100vh-3.5rem)] snap-start flex flex-col items-center justify-center px-8 text-center">
           {/* Content */}
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 rounded-full bg-accent-400/10 px-4 py-1.5 text-sm font-medium text-accent-400 mb-6">
@@ -367,9 +355,10 @@ function LoginModal({
         </button>
 
         <div className="mb-6">
-          <div className="flex items-center gap-2 mb-4">
-            <Image src="/logo.png" alt="invoiceXchange logo" width={28} height={28} className="rounded-md" />
-            <span className="font-bold text-surface-900">invoiceXchange</span>
+          <div className="flex items-center mb-4">
+            <span className="font-bold text-surface-900">invoice</span>
+            <Image src="/logo.png" alt="X" width={32} height={32} className="mx-1 inline-block [filter:brightness(0)_saturate(100%)_invert(52%)_sepia(100%)_saturate(1000%)_hue-rotate(85deg)_brightness(1.4)]" />
+            <span className="font-bold text-surface-900">change</span>
           </div>
           <h2 className="text-2xl font-bold text-surface-900">Welcome back</h2>
           <p className="text-sm text-surface-500 mt-1">Sign in to your account</p>
@@ -545,9 +534,10 @@ function SignupModal({
         </button>
 
         <div className="mb-6">
-          <div className="flex items-center gap-2 mb-4">
-            <Image src="/logo.png" alt="invoiceXchange logo" width={28} height={28} className="rounded-md" />
-            <span className="font-bold text-surface-900">invoiceXchange</span>
+          <div className="flex items-center mb-4">
+            <span className="font-bold text-surface-900">invoice</span>
+            <Image src="/logo.png" alt="X" width={32} height={32} className="mx-1 inline-block [filter:brightness(0)_saturate(100%)_invert(52%)_sepia(100%)_saturate(1000%)_hue-rotate(85deg)_brightness(1.4)]" />
+            <span className="font-bold text-surface-900">change</span>
           </div>
           <h2 className="text-2xl font-bold text-surface-900">Create an account</h2>
           <p className="text-sm text-surface-500 mt-1">Get started in minutes</p>

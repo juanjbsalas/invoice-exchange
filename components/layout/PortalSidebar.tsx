@@ -65,17 +65,12 @@ export function PortalSidebar({
     <aside className="flex h-screen w-60 flex-col border-r border-surface-700 bg-surface-900">
       {/* Portal header strip */}
       <div className={cn("flex items-center gap-3 px-5 py-5", portalColor)}>
-        <Image
-          src="/logo.png"
-          alt="invoiceXchange logo"
-          width={28}
-          height={28}
-          className="rounded-md shrink-0"
-        />
         <div>
-          <p className="text-xs font-medium text-white/60 uppercase tracking-widest">
-            invoiceXchange
-          </p>
+          <div className="flex items-center">
+              <span className="text-xs font-medium text-white/60 uppercase tracking-widest">invoice</span>
+              <Image src="/logo.png" alt="X" width={20} height={20} className="mx-0.5 inline-block [filter:brightness(0)_saturate(100%)_invert(52%)_sepia(100%)_saturate(1000%)_hue-rotate(85deg)_brightness(1.4)]" />
+              <span className="text-xs font-medium text-white/60 uppercase tracking-widest">change</span>
+            </div>
           <p className="text-sm font-semibold text-white leading-tight">
             {portalName}
           </p>
